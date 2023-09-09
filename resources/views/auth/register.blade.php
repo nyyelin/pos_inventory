@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('template')
 
-@section('content')
-<div class="container">
+@section('main_content')
+<div class="container-fluid hero-section">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+        <div class="col-md-6">
+            <div class="card shadow" style="background: rgba(0, 155, 158, 0.1)">
+                <div class="card-header text-center text-white">{{ __('Register') }}</div>
 
-                <div class="card-body">
+                <div class="card-body text-white">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -80,6 +80,14 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                <span class="btn-primary">
+                                    {{ __('Already have acount.') }}
+                                    <a href="{{ route('login') }}" class="text-white btn-link me-4 mt-3">
+                                        {{ __('Login Here!') }}
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </form>
