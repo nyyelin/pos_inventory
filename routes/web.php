@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\GroceryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,12 @@ Route::get('/home', function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
+    Route::get('/', [GroceryController::class,'index'])->name('index');
+    Route::resource('item', ItemController::class);
+});
+

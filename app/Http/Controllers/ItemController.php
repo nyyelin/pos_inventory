@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return view('grocery.item.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('grocery.item.create');
     }
 
     /**
