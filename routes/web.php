@@ -16,13 +16,9 @@ use App\Http\Controllers\GroceryController;
 |
 */
 
-Route::get('/home', function () {
-    return view('template');
-});
-
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
     return view('welcome');
 });

@@ -17,18 +17,21 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             'name' => 'Category One',
+            'shop_id' => 1,
             'created_at' => date('Y-m-d H:m:s'),
             'updated_at' => date('Y-m-d H:m:s'),
         ]);
 
         Category::create([
             'name' => 'Category Two',
+            'shop_id' => 1,
             'created_at' => date('Y-m-d H:m:s'),
             'updated_at' => date('Y-m-d H:m:s'),
         ]);
 
         Category::create([
             'name' => 'Category Three',
+            'shop_id' => 1,
             'created_at' => date('Y-m-d H:m:s'),
             'updated_at' => date('Y-m-d H:m:s'),
         ]);
