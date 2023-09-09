@@ -20,7 +20,74 @@
 
         <link href="{{ asset('template/css/bootstrap-icons.css') }}" rel="stylesheet">
 
-        <link href="{{ asset('template/css/templatemo-topic-listing.css') }}" rel="stylesheet">      
+        <link href="{{ asset('template/css/templatemo-topic-listing.css') }}" rel="stylesheet">   
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            .main-body{
+        display: grid;
+        grid-template-columns : auto 1fr;
+        
+    }
+    .sidebar {
+        border-right: 1px solid #75c2bf;
+    }
+
+    .sidebar ul{
+       
+        background: transparent;
+        min-height : 100vh;
+        min-width : 230px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 18px 0;
+        
+    }
+
+    .sidebar ul li a {
+        display: block;
+        background: transparent;
+        color:#fff;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: sans-serif;
+        padding: 10px 20px;
+
+    }
+
+    .sidebar ul li:hover{
+         background: #fff;
+    }
+
+    .sidebar ul li.active{
+         background: #fff;
+    }
+
+    .sidebar ul li:active a{
+         color: #333;
+    }
+
+    .sidebar ul li a:hover {
+         color: #333;
+         
+
+    }
+
+    .place-line {
+        width: 80%;
+        display: block;
+        text-align: center;
+    }
+
+    
+
+    .sidebar input {
+    display: none;
+    }
+        </style>
+        @yield('style')   
 <!--
 
 TemplateMo 590 topic listing
@@ -32,36 +99,7 @@ https://templatemo.com/tm-590-topic-listing
     
     <body id="top">
         <main>
-            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-5 col-12 text-center mx-auto">
-                            <div class="custom-block shadow-lg">
-                                <h6>REPORT</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-12 text-center mx-auto">
-                            <div class="custom-block shadow-lg">
-                                <h6>Stock</h6>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-lg-5 col-12 text-center mx-auto">
-                            <div class="custom-block shadow-lg">
-                               <h6>POS</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-12 text-center mx-auto">
-                            <div class="custom-block shadow-lg">
-                               <h6>SHOP</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            @yield('main_content')
         </main>
 
 

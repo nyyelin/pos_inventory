@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\GroceryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('template');
+    return view('welcome');
 });
+
+Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
+    Route::get('/', [GroceryController::class,'index'])->name('index');
+    Route::resource('item', ItemController::class);
+});
+
