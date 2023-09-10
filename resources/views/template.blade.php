@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
         <!-- datatable  -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
         <style>
             .main-body{
@@ -115,10 +116,11 @@ https://templatemo.com/tm-590-topic-listing
         <script src="{{ asset('template/js/jquery.min.js') }}"></script>
         <script src="{{ asset('template/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('template/js/jquery.sticky.js') }}"></script>
-        <script src="{{ asset('template/js/click-scroll.js') }}"></script>
+        {{-- <script src="{{ asset('template/js/click-scroll.js') }}"></script> --}}
         <script src="{{ asset('template/js/custom.js') }}"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
         @yield('script')
 
     </body>

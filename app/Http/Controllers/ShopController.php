@@ -63,7 +63,7 @@ class ShopController extends Controller
         $shop->tax = $request->tax;
         $shop->save();
 
-        return redirect()->route('shop.shop.index');
+        return redirect()->route('shop.shop.index')->with('status', 'Data Added!');
     }
 
     /**
@@ -113,7 +113,7 @@ class ShopController extends Controller
         $shop->tax = $request->tax;
         $shop->save();
 
-        return redirect()->route('shop.shop.index');
+        return redirect()->route('shop.shop.index')->with('update_status', 'Data Updated!');
     }
 
     /**

@@ -48,12 +48,11 @@ class CategoryController extends Controller
             'name' => 'required',
             'shop' => 'required',
         ]);
-        dd($request);
         $category = new Category();
         $category->name = $request->name;
         $category->shop_id = $request->shop;
         $category->save();
-        return redirect()->route('grocery.category.index');
+        return redirect()->route('grocery.category.index')->with('status', 'Data added!');
     }
 
     /**
@@ -97,7 +96,7 @@ class CategoryController extends Controller
         $category->shop_id = $request->edit_shop;
         $category->save();
 
-        return redirect()->route('grocery.category.index');
+        return redirect()->route('grocery.category.index')->with('update_status', 'Data Updated!');
     }
 
     /**

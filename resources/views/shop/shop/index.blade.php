@@ -37,9 +37,9 @@
                   <td>
                     <a href="{{ route('shop.shop.edit', $shop->id) }}" class="btn btn-warning">Edit</a>
                     <form action="{{ route('shop.shop.destroy', $shop->id) }}" method="post" class="d-inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">Delete</button>
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger">Delete</button>
                     </form>
                   </td>
                 </tr>
@@ -53,8 +53,25 @@
   </section>
 @endsection
 
-
 @section('script')
+  @if (Session::get('status'))
+    <script>
+      Swal.fire(
+        'Data Added!',
+        'Your data is saved successfully!',
+        'success'
+      );
+    </script>
+  @endif
+  @if (Session::get('update_status'))
+    <script>
+      Swal.fire(
+        'Data Updated!',
+        'Your data is updated successfully!',
+        'success'
+      );
+    </script>
+  @endif
   <script>
     $('document').ready(function() {
       var table = $('.data-table').DataTable()

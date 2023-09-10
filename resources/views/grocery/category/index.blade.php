@@ -27,9 +27,9 @@
                     <label for="name" class="form-control-label">Name</label>
                     <input type="text" name="name" class="form-control" id="name" {{ old('name') }}>
                     @error('name')
-                        <span class="text-danger pt-4 mt-5" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="text-danger pt-4 mt-5" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
@@ -41,9 +41,9 @@
                       @endforeach
                     </select>
                     @error('shop')
-                        <span class="text-danger pt-4 mt-5" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="text-danger pt-4 mt-5" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
@@ -71,11 +71,12 @@
                   <input type="hidden" id="edit_old_shop" value="{{ old('edit_shop') }}">
                   <div class="col-lg-4 col-4">
                     <label for="edit_name" class="form-control-label">Name</label>
-                    <input type="text" name="edit_name" class="form-control" id="edit_name" value="{{ old('edit_name') }}">
+                    <input type="text" name="edit_name" class="form-control" id="edit_name"
+                      value="{{ old('edit_name') }}">
                     @error('edit_name')
-                        <span class="text-danger pt-4 mt-5 edit_name_error" role="alert" data-message="{{ $message }}">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="text-danger pt-4 mt-5 edit_name_error" role="alert" data-message="{{ $message }}">
+                        <strong>{{ $message }}</strong>
+                      </span>
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
@@ -87,9 +88,10 @@
                       @endforeach
                     </select>
                     @error('edit_shop')
-                        <span class="text-danger pt-4 mt-5 edit_shop_error" role="alert" data-message="{{ $message }}">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                      <span class="text-danger pt-4 mt-5 edit_shop_error" role="alert"
+                        data-message="{{ $message }}">
+                        <strong>{{ $message }}</strong>
+                      </span>
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
@@ -122,10 +124,11 @@
                   <td>
                     <button class="btn btn-warning editBtn" data-id="{{ $category->id }}"
                       data-name="{{ $category->name }}" data-shop="{{ $category->shop_id }}">Edit</button>
-                    <form action="{{ route('grocery.category.destroy', $category->id) }}" method="post" class="d-inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">Delete</button>
+                    <form action="{{ route('grocery.category.destroy', $category->id) }}" method="post"
+                      class="d-inline-block">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger">Delete</button>
                     </form>
                   </td>
                 </tr>
@@ -139,12 +142,29 @@
   </section>
 @endsection
 
-
 @section('script')
+  @if (Session::get('status'))
+    <script>
+      Swal.fire(
+        'Data Added!',
+        'Your data is saved successfully!',
+        'success'
+      );
+    </script>
+  @endif
+  @if (Session::get('update_status'))
+  <script>
+    Swal.fire(
+      'Data Updated!',
+      'Your data is updated successfully!',
+      'success'
+    );
+  </script>
+@endif
   <script>
     $('document').ready(function() {
       var table = $('.data-table').DataTable()
-      
+
       var edit_name_error = $('.edit_name_error').data('message')
       var edit_shop_error = $('.edit_shop_error').data('message')
 
@@ -152,7 +172,7 @@
       var oldname = $('#edit_name').val()
       var oldshop = $('#edit_old_shop').val()
 
-      if(edit_name_error || edit_shop_error){
+      if (edit_name_error || edit_shop_error) {
         $('.showAddDiv').hide();
         $('.showEditDiv').show();
         $('.showBtn').show();
@@ -178,19 +198,17 @@
         var id = $(this).data('id');
         var name = $(this).data('name');
         var shop_id = $(this).data('shop');
-        
+
         passEidtData(id, name, shop_id)
       })
 
-      function passEidtData(id, name, shop_id){
-        console.log(id, name, shop_id)
+      function passEidtData(id, name, shop_id) {
         var url = `{{ route('grocery.category.update', ':id') }}`
         url = url.replace(':id', id)
 
         $('#edit_id').val(id);
         $('#edit_name').val(name)
         $('#edit_shop').val(shop_id)
-        console.log(url)
         $('#editForm').attr('action', url)
       }
     })
