@@ -27,7 +27,7 @@
             </div>
         </div> -->
 
-        <h5 class="text-white">Adding New Item </h5>
+        <h5 class="text-white">Adding New Product </h5>
         <span>Please Fill the following information</span>
 
         <form method="post" action="{{route('grocery.item.store')}}" class="mt-2 col-10 ">
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="mb-3 ">
-                    <button class="btn btn-warning form-control ">Save</button>
+                    <button class="btn custom-btn form-control ">Save</button>
                 </div>
 
 

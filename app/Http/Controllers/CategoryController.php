@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,9 +13,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $shops = Shop::all();
+        // if ($request->ajax()) {
+        //     $id = 1;
+            
+        //     $query = Category::orderBy('id', 'DESC')->paginate(10);
+            
+        // }
+        $categories = Category::orderBy('id', 'DESC')->get();
+        return view('grocery.category.index', compact('shops', 'categories'));
     }
 
     /**
@@ -35,7 +44,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'shop' => 'required',
+        ]);
+        dd($request);
+        $category = new Category();
+        $category->name = $request->name;
+        $category->shop_id = $request->shop;
+        $category->save();
+        return redirect()->route('grocery.category.index');
     }
 
     /**
@@ -69,7 +87,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'edit_name' => 'required',
+            'edit_shop' => 'required',
+        ]);
+
+        $category = Category::find($request->id);
+        $category->name = $request->edit_name;
+        $category->shop_id = $request->edit_shop;
+        $category->save();
+
+        return redirect()->route('grocery.category.index');
     }
 
     /**
@@ -80,6 +108,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category = Category::find($category->id);
+        $category->delete();
+        return redirect()->route('grocery.category.index');
     }
 }

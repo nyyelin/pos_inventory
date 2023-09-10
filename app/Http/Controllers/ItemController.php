@@ -18,7 +18,7 @@ class ItemController extends Controller
 
     protected $defModel;
 
-    public function __construct(User $model){
+    public function __construct(Stock $model){
         $this->defModel = $model;
     }
     /**
@@ -28,30 +28,7 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $auth = \Auth::user();
-            
-            
-            $data = \App\Models\Item::with('category:id,name')->whereHas('category', function($q) use ($auth){
-                $q->whereHas('shop', function($q) use ($auth){
-                    $q->where('user_id', $auth->id);
-                });
-            })->get();
 
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-   
-                           $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="remove btn btn-danger btn-sm">Remove</a>
-                           <a href="javascript:void(0)" class="edit btn btn-warning btn-sm">Edit</a>';
-     
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-
-            
-        }
         return view('grocery.item.index');
     }
 
@@ -62,7 +39,7 @@ class ItemController extends Controller
         'canEdit' => true,
         'canDelete' => true,
     ];
-       $query = \App\Models\Item::query()->with('category:id,name')->whereHas('category', function($q) use ($auth){
+       $query = \App\Models\Item::query()->withSum('stocks','qty')->with('category:id,name')->whereHas('category', function($q) use ($auth){
             $q->whereHas('shop', function($q) use ($auth){
                 $q->where('user_id', $auth->id);
             });
@@ -113,7 +90,7 @@ class ItemController extends Controller
 
         $stock = Stock::create([
             'item_id' => $item->id,
-            'qty' => 0,
+            'qty' => $inputs['qty'],
             'expired_date' => $inputs['expired_date'] ?? null,
             'brand' => $inputs['brand'],
             'sell_price' => $inputs['sell_price'],

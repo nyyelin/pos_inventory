@@ -14,4 +14,10 @@ class Item extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+    public function stocks(){
+        return $this->hasMany(Stock::class)
+        ->whereNull('expired_date')
+        ->orWhere('expired_date', '>', date('Y-m-d'));
+    }
 }

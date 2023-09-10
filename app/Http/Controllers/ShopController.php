@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ShopController extends Controller
 {
@@ -14,7 +18,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        $shops = Shop::orderBy('id', 'DESC')->get();
+        return view('shop.shop.index', compact('shops'));
     }
 
     /**
@@ -24,7 +29,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        return view('shop.shop.create');
     }
 
     /**
@@ -35,7 +40,30 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            // 'name' => 'required',
+            'shop_name' => 'required',
+            // 'email' => 'required',
+            // 'user_phone' => ['required', 'max:11'],
+            'shop_phone' => ['required', 'max:11'],
+            'shop_address' => 'required',
+        ]);
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->password = bcrypt('12345678');
+        // $user->phone = $request->phone;
+        // $user->save();
+
+        $shop = new Shop();
+        $shop->name = $request->shop_name;
+        $shop->phone = $request->shop_phone;
+        $shop->address = $request->shop_address;
+        $shop->user_id = Auth::user()->id;
+        $shop->tax = $request->tax;
+        $shop->save();
+
+        return redirect()->route('shop.shop.index');
     }
 
     /**
@@ -57,7 +85,7 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        return view('shop.shop.edit', compact('shop'));
     }
 
     /**
@@ -69,7 +97,23 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        $request->validate([
+            // 'name' => 'required',
+            'shop_name' => 'required',
+            // 'email' => 'required',
+            // 'user_phone' => 'required',
+            'shop_phone' => 'required',
+            'shop_address' => 'required',
+        ]);
+        $shop = new Shop();
+        $shop->name = $request->shop_name;
+        $shop->phone = $request->shop_phone;
+        $shop->address = $request->shop_address;
+        $shop->user_id = Auth::user()->id;
+        $shop->tax = $request->tax;
+        $shop->save();
+
+        return redirect()->route('shop.shop.index');
     }
 
     /**
@@ -80,6 +124,7 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        //
+        $shop->delete();
+        return redirect()->route('shop.shop.index');
     }
 }

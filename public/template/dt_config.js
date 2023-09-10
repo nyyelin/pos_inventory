@@ -18,6 +18,7 @@ $.fn.dataTable.Api.register("clearPipeline()", function () {
 $.fn.dataTable.dtcalled = function (config) {
     dtSelector = config.selector;
 
+
     console.log(config.columns);
 
      dtObj = $(dtSelector).DataTable({
@@ -60,10 +61,23 @@ $.fn.dataTable.dtcalled = function (config) {
                             data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-trash" aria-hidden="true"></i></a>`;
                      }
 
+                     if (data.canDetail === true) {
+                        let url = config.url.dt_detail.replace(":id", row.id);
+                        buttons += `&nbsp;<a class="btn btn-primary btn-detail" href="#" 
+                        data_url="${config.url.dt_detail}"
+                         data-id="${row.id}"
+                           data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-info" aria-hidden="true"></i></a>`;
+                    }
+
                      return buttons;
                  },
              },
          ],
+         "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {                
+            
+                $(nRow).addClass('text-white');
+                      
+        },
      });
 
      $(`${dtSelector} tbody`).on("click", '.btn-delete', function () {
