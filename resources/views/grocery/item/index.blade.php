@@ -18,33 +18,18 @@
             <h5 class="card-header bg-white py-3 px-4 fs-4 border-0"> Product List</h5>
             
             <div class="card-body px-4">
-            <table class="table data-table">
+            <table class="table data-table" id="dataTable">
                 <thead>
                     <tr>
+                    
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    </tr>
+                    
                 </tbody>
                 </table>
             </div>
@@ -59,6 +44,31 @@
 
 @section('script')
 <script>
+    $(document).ready(function(){
+        $.fn.dataTable.dtcalled({
+            placeholder: "အမည်",
+            selector:'#dataTable',
+            url:{
+                'dt_url': "{{route('grocery.ajax.items')}}",
+                'dt_del': "{{route('grocery.item.destroy',':id')}}",
+                'dt_edit': "{{route('grocery.item.edit',':id')}}"
+            },
+
+            columns:[
+                {data:'id'},
+                {data:'name'},
+                {data:'category.name'},
+                 
+            ]
+
+        })
+    })
+
+</script>
+@endsection
+
+@section('scripts')
+<script>
     $('document').ready(function(){
         var table = $('.data-table').DataTable({
             processing: true,
@@ -67,10 +77,19 @@
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
+                {data: 'category', name: 'category'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+        $('.data-table tbody').on('click','.remove', function(){
+           let ans = confirm('Are you sure?');
+           if(ans){
+
+           }
         })
+        
+        })
+
+
 </script>
 @endsection 

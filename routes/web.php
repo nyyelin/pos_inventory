@@ -23,8 +23,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
+Route::group(['prefix' => 'grocery','as' => 'grocery.','middleware' => ['auth']], function(){
     Route::get('/', [GroceryController::class,'index'])->name('index');
     Route::resource('item', ItemController::class);
+
+    Route::prefix('ajax')->group(function() {
+        Route::post('/items', [ItemController::class, 'getItems'])->name('ajax.items');
+    });
 });
+
+
+
 

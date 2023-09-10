@@ -3,14 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Stock;
 use App\Models\StockTransaction;
 use DNS1D;
+use Datatables;
+use App\ModelService;
 
 class ItemController extends Controller
 {
+    use ModelService;
+
+    protected $defModel;
+
+    public function __construct(User $model){
+        $this->defModel = $model;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,16 +29,55 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $id = 1;
+            $auth = \Auth::user();
             
-            $query = \App\Models\Item::whereHas('category', function($q) use ($id){
-                $q->whereHas('shop', function($q) use ($id){
-                    $q->where('user_id', $id);
+            
+            $data = \App\Models\Item::with('category:id,name')->whereHas('category', function($q) use ($auth){
+                $q->whereHas('shop', function($q) use ($auth){
+                    $q->where('user_id', $auth->id);
                 });
-            })->paginate(10);
+            })->get();
+
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="remove btn btn-danger btn-sm">Remove</a>
+                           <a href="javascript:void(0)" class="edit btn btn-warning btn-sm">Edit</a>';
+     
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+
             
         }
         return view('grocery.item.index');
+    }
+
+    public function getItems(Request $request){
+       $options = $request->all();
+       $auth = \Auth::user();
+       $action = [
+        'canEdit' => true,
+        'canDelete' => true,
+    ];
+       $query = \App\Models\Item::query()->with('category:id,name')->whereHas('category', function($q) use ($auth){
+            $q->whereHas('shop', function($q) use ($auth){
+                $q->where('user_id', $auth->id);
+            });
+        });
+       $query = $this->optionsQuery($query, $options);
+       $data = $query->get();
+       return Datatables::of($data)
+       ->addIndexColumn()
+      
+       ->addColumn('action', function($row) use ($action){
+        return $action;
+             
+       })
+       ->rawColumns(['action'])
+       ->make(true);
     }
 
     /**
