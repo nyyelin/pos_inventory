@@ -21,6 +21,8 @@
         <link href="{{ asset('template/css/bootstrap-icons.css') }}" rel="stylesheet">
 
         <link href="{{ asset('template/css/templatemo-topic-listing.css') }}" rel="stylesheet">   
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+        <!-- datatable  -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <style>
@@ -29,6 +31,11 @@
         grid-template-columns : auto 1fr;
         
     }
+
+    .hero-section {
+        height: auto;
+    }
+    
     .sidebar {
         border-right: 1px solid #75c2bf;
     }
@@ -110,6 +117,9 @@ https://templatemo.com/tm-590-topic-listing
         <script src="{{ asset('template/js/jquery.sticky.js') }}"></script>
         <script src="{{ asset('template/js/click-scroll.js') }}"></script>
         <script src="{{ asset('template/js/custom.js') }}"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        @yield('script')
 
     </body>
 </html>

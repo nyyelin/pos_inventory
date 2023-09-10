@@ -22,6 +22,7 @@ class CreateStockTransactionsTable extends Migration
             $table->text('brand_name')->nullable();
             $table->text('unit');
             $table->integer('total_price');
+            // stock date ကျန်နေပါတယ်
             $table->timestamps();
             $table->softDeletes();
 
