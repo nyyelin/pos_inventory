@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\GroceryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +28,6 @@ Route::get('/', function () {
 Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
     Route::get('/', [GroceryController::class,'index'])->name('index');
     Route::resource('item', ItemController::class);
+    Route::resource('category', CategoryController::class);
 });
 
