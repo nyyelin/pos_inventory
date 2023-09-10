@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('main_content')
-<div class="container-fluid hero-section">
+<div class="container-fluid hero-section" style="height: 100vh">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow" style="background: rgba(0, 155, 158, 0.1)">

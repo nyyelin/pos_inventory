@@ -60,7 +60,7 @@
         <div class="container my-5 showAddDiv showEditDiv">
           <div class="card shadow" style="background: rgba(0, 155, 158, 0.1)">
             <div class="card-title">
-              <h5 class="ps-4 pt-3">Add Category</h5>
+              <h5 class="ps-4 pt-3">Edit Category</h5>
             </div>
             <form action="" method="post" class="d-inline-block" id="editForm">
               @csrf
@@ -93,7 +93,7 @@
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
-                    <button type="submit" class="btn btn-primary mt-4">Edit</button>
+                    <button type="submit" class="btn btn-primary mt-4">Update</button>
                   </div>
                 </div>
               </div>
@@ -132,9 +132,9 @@
               @endforeach
             </tbody>
           </table>
+        </div>
       </main>
 
-    </div>
     </div>
   </section>
 @endsection
