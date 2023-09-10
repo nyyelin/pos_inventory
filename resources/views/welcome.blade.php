@@ -1,7 +1,7 @@
 @extends('template')
 @section('main_content')
 
-<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1" style="height: 100vh">
     <div class="container">
         <div class="row">
 
