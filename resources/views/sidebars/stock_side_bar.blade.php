@@ -14,7 +14,7 @@
       <a href="{{ route('grocery.item.index') }}">Product List</a>
     </li>
 
-    <li><a href="/about">Add Stock</a></li>
+    <li><a href="{{route('grocery.stock-transactions.create')}}">Add Stock</a></li>
     <li><a href="{{route('grocery.stock-transactions.index')}}">Stock Transactions</a></li>
     <li><a href="/">Main Page</a></li>
   </ul>

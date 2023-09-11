@@ -82,7 +82,8 @@ class ItemController extends Controller
         $item = Item::create([
             'name' => $inputs['name'],
             'category_id' => $inputs['category_id'],
-           'bar_code' => ''
+           'bar_code' => '',
+           'brand' => $inputs['brand']
         ]);
 
         $item->bar_code =  444564565 + $item->id;

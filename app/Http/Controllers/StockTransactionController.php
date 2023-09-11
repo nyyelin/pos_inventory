@@ -55,7 +55,9 @@ class StockTransactionController extends Controller
      */
     public function create()
     {
-        //
+        $items = \App\Models\Item::withSum('stocks','qty')->with('category')->get();
+        
+        return view('grocery.stock.transactions_create',compact('items'));
     }
 
     /**
@@ -66,7 +68,29 @@ class StockTransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+        $item = \App\Models\Item::find($inputs['item_id']);
+        $stock = \App\Models\Stock::create([
+            'item_id' => $item->id,
+            'qty' => $inputs['new_qty'],
+            'expired_date' => $inputs['expired_date'] ?? null,
+            'brand' => null,
+            'sell_price' => $inputs['sell_price'],
+            'origin_price' => $inputs['price'],
+
+        ]);
+
+        $stock_transaction = \App\Models\StockTransaction::create([
+            'item_id' => $item->id,
+            'stock_id' => $stock->id,
+            'qty' => $inputs['new_qty'],
+            'price_per_one' => $inputs['price'],
+            'brand_name' => $item->name,
+            'unit' => '1',
+            'total_price' => $item['price'] * $inputs['new_qty']
+        ]);
+
+        return redirect()->route('grocery.item.index');
     }
 
     /**
