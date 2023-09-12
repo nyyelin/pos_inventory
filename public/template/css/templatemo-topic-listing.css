@@ -260,7 +260,7 @@ strong {
 .breadcrumb-item+.breadcrumb-item::before,
 .breadcrumb-item a:hover,
 .breadcrumb-item.active {
-  color: var(--white-color);
+  /* color: var(--white-color); */
 }
 
 .site-header .custom-icon {
@@ -490,7 +490,7 @@ strong {
   position: relative;
   overflow: hidden;
   padding-top: 150px;
-  padding-bottom: 150px;
+  /* padding-bottom: 150px; */
   height: 100vh;
 }
 
@@ -517,6 +517,14 @@ strong {
   border: 0;
   border-radius: var(--border-radius-large) !important;
   color: var(--white-color);
+  max-width: 150px;
+}
+
+.hero-section button[type="button"] {
+  /* background-color: var(--primary-color); */
+  border: 0;
+  border-radius: var(--border-radius-large) !important;
+  /* color: var(--white-color); */
   max-width: 150px;
 }
 

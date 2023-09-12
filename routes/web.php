@@ -35,5 +35,7 @@ Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
 
 Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
     Route::resource('shop', ShopController::class);
+    Route::post('change_password', [ShopController::class, 'change_password'])->name('change_password');
+
 });
 

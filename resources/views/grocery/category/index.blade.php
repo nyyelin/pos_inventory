@@ -1,11 +1,11 @@
 @extends('template')
 @section('main_content')
   <section>
-    <div class="main-body hero-section p-0">
+    <div class="main-body p-0">
       @include('sidebars/stock_side_bar')
-      <main class=" mt-3 ms-3">
+      <main class=" mt-3 ms-2 bg-light">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
+          <ol class="breadcrumb mt-3 ms-2">
             <li class="breadcrumb-item"><a href="#">Stock</a></li>
             <li class="breadcrumb-item"><a href="#">Category List</a></li>
           </ol>
@@ -103,14 +103,15 @@
             </form>
           </div>
         </div>
+
         <div class="container">
           <div class="d-inline-block mb-5">
             <h5 class="d-inline">Category List</h5>
             <button class="btn btn-primary ms-5 showBtn"><i class="bi bi-plus-circle pe-2"></i> Add Category</button>
           </div>
 
-          <table class="table data-table">
-            <thead>
+          <table class="table data-table table-responsive">
+            <thead class="bg-dark text-white">
               <th>No.</th>
               <th>Name</th>
               <th>Shop</th>
@@ -118,7 +119,7 @@
             </thead>
             <tbody>
               @foreach ($categories as $key => $category)
-                <tr class="text-white">
+                <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $category->name }}</td>
                   <td>{{ $category->shop->name }}</td>

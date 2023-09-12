@@ -3,9 +3,9 @@
   <section>
     <div class="main-body hero-section p-0">
       @include('sidebars/shop_side_bar')
-      <main class=" mt-3 ms-3">
+      <main class=" mt-3 ms-3 bg-light">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
+          <ol class="breadcrumb ms-3 mt-2">
             <li class="breadcrumb-item"><a href="#">Shop</a></li>
             <li class="breadcrumb-item"><a href="#">New Shop</a></li>
           </ol>

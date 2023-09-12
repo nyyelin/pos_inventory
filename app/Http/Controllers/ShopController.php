@@ -139,4 +139,16 @@ class ShopController extends Controller
         $shop->delete();
         return redirect()->route('shop.shop.index');
     }
+
+    public function change_password(Request $request)
+    {
+        $request->validate([
+                'password' => ['required', 'min:8'],
+        ]);
+
+        $user = User::find(Auth()->user()->id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->back();
+    }
 }

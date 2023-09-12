@@ -26,7 +26,7 @@
           </div>
         </div>
         @role('admin')
-          <div class="col-lg-5 col-12 text-center mx-auto">
+          <div class="col-lg-5 col-12 text-center mx-auto mt-3">
             <div class="custom-block shadow-lg">
               <a class="fs-4 fw-bold" href="{{ route('shop.shop.index') }}">SHOP</a>
             </div>

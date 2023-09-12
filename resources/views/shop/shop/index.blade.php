@@ -1,11 +1,11 @@
 @extends('template')
 @section('main_content')
   <section>
-    <div class="main-body hero-section p-0">
+    <div class="main-body p-0">
       @include('sidebars/shop_side_bar')
-      <main class=" mt-3 ms-3">
+      <main class=" mt-3 ms-2 bg-light">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
+          <ol class="breadcrumb ms-3">
             <li class="breadcrumb-item"><a href="#">Shop</a></li>
             <li class="breadcrumb-item"><a href="#">Shop List</a></li>
           </ol>
@@ -15,8 +15,8 @@
             <h5 class="d-inline">Shop List</h5>
           </div>
 
-          <table class="table data-table">
-            <thead>
+          <table class="table data-table table-responsive">
+            <thead class="bg-dark text-white">
               <th>No.</th>
               <th>Shop Name</th>
               <th>User Name</th>
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               @foreach ($shops as $key => $shop)
-                <tr class="text-white">
+                <tr >
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $shop->name }}</td>
                   <td>{{ $shop->user->name }}

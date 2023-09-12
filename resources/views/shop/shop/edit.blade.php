@@ -3,9 +3,9 @@
   <section>
     <div class="main-body hero-section p-0">
       @include('sidebars/shop_side_bar')
-      <main class=" mt-3 ms-3">
+      <main class=" mt-3 ms-2 bg-light">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
+          <ol class="breadcrumb ms-3 mt-2">
             <li class="breadcrumb-item"><a href="#">Shop</a></li>
             <li class="breadcrumb-item"><a href="#">New Shop</a></li>
           </ol>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-6 col-6">
-                    <label for="password" class="form-control-label">User Phone</label>
+                    <label for="password" class="form-control-label">New Password</label>
                     <input type="password" name="password" class="form-control mb-2" maxlength="8" id="password">
                     @error('password')
                       <span class="text-danger pt-4 mt-5" role="alert">
