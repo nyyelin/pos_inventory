@@ -20,7 +20,7 @@
               @csrf
               <div class="card-body">
                 <div class="row">
-                  {{-- <div class="col-lg-6 col-6">
+                  <div class="col-lg-6 col-6">
                     <label for="name" class="form-control-label">User Name</label>
                     <input type="text" name="name" class="form-control mb-2" id="name" {{ old('name') }}>
                     @error('name')
@@ -28,29 +28,31 @@
                         <strong>{{ $message }}</strong>
                       </span>
                     @enderror
-                  </div> --}}
+                  </div>
                   <div class="col-lg-6 col-6">
                     <label for="shop_name" class="form-control-label">Shop Name</label>
-                    <input type="text" name="shop_name" class="form-control mb-2" id="shop_name" value="{{ old('shop_name') }}">
+                    <input type="text" name="shop_name" class="form-control mb-2" id="shop_name"
+                      value="{{ old('shop_name') }}">
                     @error('shop_name')
                       <span class="text-danger pt-4 mt-5" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
-
+{{-- 
                   <div class="col-lg-6 col-6">
                     <label for="shop_phone" class="form-control-label">Shop Phone</label>
-                    <input type="text" name="shop_phone" class="form-control mb-2" id="shop_phone" value="{{ old('shop_phone') }}">
+                    <input type="text" name="shop_phone" class="form-control mb-2" id="shop_phone"
+                      value="{{ old('shop_phone') }}">
                     @error('shop_phone')
                       <span class="text-danger pt-4 mt-5" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
                     @enderror
-                  </div>
+                  </div> --}}
                 </div>
 
-                {{-- <div class="row my-2">
+                <div class="row my-2">
                   <div class="col-lg-6 col-6">
                     <label for="email" class="form-control-label">User Email</label>
                     <input type="email" name="email" class="form-control mb-2" id="email" {{ old('email') }}>
@@ -61,6 +63,20 @@
                     @enderror
                   </div>
                   <div class="col-lg-6 col-6">
+                    <label for="shop_phone" class="form-control-label">Shop Phone</label>
+                    <input type="number" name="shop_phone" class="form-control mb-2" id="shop_phone"
+                      {{ old('shop_phone') }}>
+                    @error('shop_phone')
+                      <span class="text-danger pt-4 mt-5" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+
+                </div>
+
+                <div class="row my-2">
+                  <div class="col-lg-6 col-6">
                     <label for="user_phone" class="form-control-label">User Phone</label>
                     <input type="number" name="user_phone" class="form-control mb-2" maxlength="8" id="user_phone">
                     @error('user_phone')
@@ -69,23 +85,23 @@
                       </span>
                     @enderror
                   </div>
-                </div> --}}
-
-                <div class="row my-2">
-                  {{-- <div class="col-lg-4 col-4">
-                    <label for="shop_phone" class="form-control-label">Shop Phone</label>
-                    <input type="text" name="shop_phone" class="form-control mb-2" id="shop_phone" {{ old('shop_phone') }}>
-                    @error('shop_phone')
+                  <div class="col-lg-6 col-4">
+                    <label for="tax" class="form-control-label">Tax</label>
+                    <input type="text" name="tax" class="form-control mb-2" id="tax"
+                      value="{{ old('tax') }}">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-6">
+                    <label for="password" class="form-control-label">Password</label>
+                    <input type="password" name="password" class="form-control mb-2" id="password">
+                    @error('password')
                       <span class="text-danger pt-4 mt-5" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
                     @enderror
-                  </div> --}}
-                  <div class="col-lg-6 col-4">
-                    <label for="tax" class="form-control-label">Tax</label>
-                    <input type="text" name="tax" class="form-control mb-2" id="tax" value="{{ old('tax') }}">
                   </div>
-                  <div class="col-lg-6 col-5">
+                  <div class="col-lg-6 col-6">
                     <label for="shop_address" class="form-control-label">Shop Address</label>
                     <textarea name="shop_address" id="shop_address" class="form-control mb-2">
                         {{ old('shop_address') }}
@@ -100,7 +116,7 @@
                 <div class="row">
                   <div class="col-lg-4 col-4 mx-auto">
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary mt-4 py-2" style="max-width: 100%">Add</button>
+                      <button type="submit" class="btn btn-primary mt-4 py-2" style="max-width: 100%"> <i class="bi bi-plus-circle pe-2"></i>Add</button>
                     </div>
                   </div>
                 </div>

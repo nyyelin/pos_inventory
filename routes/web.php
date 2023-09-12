@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\GroceryController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ShopController;
 use App\Models\Category;
 
@@ -21,10 +22,10 @@ use App\Models\Category;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', function () {
+//     return view('welcome');
+// });
 
 Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
     Route::get('/', [GroceryController::class,'index'])->name('index');

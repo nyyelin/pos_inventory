@@ -20,6 +20,7 @@
               <th>No.</th>
               <th>Shop Name</th>
               <th>User Name</th>
+              <th>Email</th>
               <th>Phone</th>
               <th>Address</th>
               <th>Tax</th>
@@ -30,17 +31,21 @@
                 <tr class="text-white">
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $shop->name }}</td>
-                  <td>{{ $shop->user->name }}</td>
+                  <td>{{ $shop->user->name }}
+                    <br>
+                    <span class="badge bg-secondary">{{ $shop->user->phone }}</span>
+                  </td>
+                  <td>{{ $shop->user->email }}</td>
                   <td>{{ $shop->phone }}</td>
                   <td>{{ $shop->address }}</td>
                   <td>{{ $shop->tax }}</td>
                   <td>
-                    <a href="{{ route('shop.shop.edit', $shop->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('shop.shop.destroy', $shop->id) }}" method="post" class="d-inline-block">
+                    <a href="{{ route('shop.shop.edit', $shop->id) }}" class="btn btn-warning"> <i class="bi bi-pencil-square"></i> Edit</a>
+                    {{-- <form action="{{ route('shop.shop.destroy', $shop->id) }}" method="post" class="d-inline-block">
                       @csrf
                       @method('DELETE')
                       <button class="btn btn-danger">Delete</button>
-                    </form>
+                    </form> --}}
                   </td>
                 </tr>
               @endforeach

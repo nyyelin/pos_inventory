@@ -41,25 +41,28 @@ class ShopController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // 'name' => 'required',
+            'name' => 'required',
             'shop_name' => 'required',
-            // 'email' => 'required',
-            // 'user_phone' => ['required', 'max:11'],
+            'email' => 'required',
+            'user_phone' => ['required', 'max:11'],
             'shop_phone' => ['required', 'max:11'],
             'shop_address' => 'required',
+            'password' => ['required', 'min:8'],
         ]);
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = bcrypt('12345678');
-        // $user->phone = $request->phone;
-        // $user->save();
+        // dd($request);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt('12345678');
+        $user->phone = $request->user_phone;
+        $user->save();
 
         $shop = new Shop();
         $shop->name = $request->shop_name;
         $shop->phone = $request->shop_phone;
         $shop->address = $request->shop_address;
-        $shop->user_id = Auth::user()->id;
+        // $shop->user_id = Auth::user()->id;
+        $shop->user_id = $user->id;
         $shop->tax = $request->tax;
         $shop->save();
 
@@ -98,18 +101,27 @@ class ShopController extends Controller
     public function update(Request $request, Shop $shop)
     {
         $request->validate([
-            // 'name' => 'required',
+            'name' => 'required',
             'shop_name' => 'required',
-            // 'email' => 'required',
-            // 'user_phone' => 'required',
+            'email' => 'required',
+            'user_phone' => 'required',
             'shop_phone' => 'required',
             'shop_address' => 'required',
         ]);
-        $shop = new Shop();
+        $user = User::find($shop->user_id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->user_phone;
+        if($request->password){
+            $user->password = bcrypt($request->password);
+        }
+        $user->assignRole('shopper');
+        $user->save();
+
         $shop->name = $request->shop_name;
         $shop->phone = $request->shop_phone;
         $shop->address = $request->shop_address;
-        $shop->user_id = Auth::user()->id;
+        $shop->user_id = $user->id;
         $shop->tax = $request->tax;
         $shop->save();
 

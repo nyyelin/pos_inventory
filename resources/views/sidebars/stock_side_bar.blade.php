@@ -4,14 +4,14 @@
   <ul id="menu">
 
     <li>
-      <a href="{{ route('grocery.category.index') }}">Category</a>
+      <a href="{{ route('grocery.category.index') }}"> <i class="bi bi-list"></i> Category</a>
     </li>
     <li>
       <a href="{{ route('grocery.item.create') }}">New Product</a>
     </li>
 
     <li>
-      <a href="{{ route('grocery.item.index') }}">Product List</a>
+      <a href="{{ route('grocery.item.index') }}"> <i class="bi bi-list"></i>Product List</a>
     </li>
 
     <li><a href="/about">Add Stock</a></li>

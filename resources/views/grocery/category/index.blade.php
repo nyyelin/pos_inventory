@@ -47,7 +47,8 @@
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
-                    <button type="submit" class="btn btn-primary mt-4">Add</button>
+                    <button type="submit" class="btn btn-primary mt-4"> <i class="bi bi-plus-circle pe-2"></i>
+                       Add</button>
                   </div>
                 </div>
               </div>
@@ -95,7 +96,7 @@
                     @enderror
                   </div>
                   <div class="col-lg-4 col-4">
-                    <button type="submit" class="btn btn-primary mt-4">Update</button>
+                    <button type="submit" class="btn btn-primary mt-4"><i class="bi bi-pencil-square pe-2"></i> Update</button>
                   </div>
                 </div>
               </div>
@@ -105,7 +106,7 @@
         <div class="container">
           <div class="d-inline-block mb-5">
             <h5 class="d-inline">Category List</h5>
-            <button class="btn btn-primary ms-5 showBtn">Add Category</button>
+            <button class="btn btn-primary ms-5 showBtn"><i class="bi bi-plus-circle pe-2"></i> Add Category</button>
           </div>
 
           <table class="table data-table">
@@ -123,12 +124,12 @@
                   <td>{{ $category->shop->name }}</td>
                   <td>
                     <button class="btn btn-warning editBtn" data-id="{{ $category->id }}"
-                      data-name="{{ $category->name }}" data-shop="{{ $category->shop_id }}">Edit</button>
+                      data-name="{{ $category->name }}" data-shop="{{ $category->shop_id }}"><i class="bi bi-pencil-square pe-2"></i> Edit</button>
                     <form action="{{ route('grocery.category.destroy', $category->id) }}" method="post"
                       class="d-inline-block">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger">Delete</button>
+                      <button class="btn btn-danger"> <i class="bi bi-trash pe-2"></i> Delete</button>
                     </form>
                   </td>
                 </tr>

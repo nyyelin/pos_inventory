@@ -22,7 +22,7 @@ class RoleTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:m:s'),
             ],
             [
-                'name' => 'shoper',
+                'name' => 'shopper',
                 'guard_name' => 'web',
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s'),
