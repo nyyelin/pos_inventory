@@ -190,6 +190,8 @@ https://templatemo.com/tm-590-topic-listing
   <script src="{{ asset('template/js/jquery.min.js') }}"></script>
   <script src="{{ asset('template/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('template/js/jquery.sticky.js') }}"></script>
+  <script src="{{ asset('plugin/js/localstorage.js') }}" rel="stylesheet"></script>
+
   {{-- <script src="{{ asset('template/js/click-scroll.js') }}"></script> --}}
   <script src="{{ asset('template/js/custom.js') }}"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
