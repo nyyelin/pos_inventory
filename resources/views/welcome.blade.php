@@ -22,7 +22,7 @@
       <div class="row mt-3">
         <div class="col-lg-5 col-12 text-center mx-auto">
           <div class="custom-block shadow-lg">
-            <a class="fs-4 fw-bold" href="#">POS</a>
+            <a class="fs-4 fw-bold" href="{{ route('pos.index') }}">POS</a>
           </div>
         </div>
         @role('admin')

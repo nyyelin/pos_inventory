@@ -26,16 +26,19 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 // Route::get('/home', function () {
 //     return view('welcome');
 // });
+Route::middleware('auth')->group(function () {
+    Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
+        Route::get('/', [GroceryController::class,'index'])->name('index');
+        Route::resource('item', ItemController::class);
+        Route::resource('category', CategoryController::class);
+    });
 
-Route::group(['prefix' => 'grocery','as' => 'grocery.'], function(){
-    Route::get('/', [GroceryController::class,'index'])->name('index');
-    Route::resource('item', ItemController::class);
-    Route::resource('category', CategoryController::class);
+    Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
+        Route::resource('shop', ShopController::class);
+        Route::post('change_password', [ShopController::class, 'change_password'])->name('change_password');
+    });
+
+    Route::group(['prefix' => 'pos','as' => 'pos.'], function(){
+        Route::get('/', [PosController::class, 'index'])->name('index');
+    });
 });
-
-Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
-    Route::resource('shop', ShopController::class);
-    Route::post('change_password', [ShopController::class, 'change_password'])->name('change_password');
-
-});
-
