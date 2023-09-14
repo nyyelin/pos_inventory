@@ -10,4 +10,10 @@ class Stock extends Model
     use HasFactory;
 
     protected $fillable = ['item_id','qty','expired_date', 'brand','sell_price','origin_price', 'status'];
+
+    public function item(){
+        return $this->belongsTo(Item::class);
+    }
+
+    
 }
