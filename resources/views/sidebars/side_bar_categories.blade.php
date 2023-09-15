@@ -14,10 +14,6 @@
       <a href="{{ route('grocery.retail.index') }}">Retail</a>
     </li>
 
-    <li>
-      <a href="{{ route('grocery.inventory.index') }}">Inventory</a>
-    </li>
-
     
     <li><a href="/">Main Page</a></li>
   </ul>

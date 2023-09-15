@@ -4,9 +4,11 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\RetailController;
 use App\Http\Controllers\GroceryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockTransactionController;
+use App\Http\Controllers\InventoryController;
 use App\Models\Category;
 
 /*
@@ -30,14 +32,29 @@ Route::get('/', function () {
 Route::group(['prefix' => 'grocery','as' => 'grocery.','middleware' => ['auth']], function(){
     Route::get('/', [GroceryController::class,'index'])->name('index');
     Route::resource('item', ItemController::class);
+    
 
     Route::prefix('ajax')->group(function() {
         Route::post('/items', [ItemController::class, 'getItems'])->name('ajax.items');
-        Route::post('/stock_trans', [StockTransactionController::class, 'getStockTrans'])->name('ajax.stock.trans');
+        Route::post('/stock_trans', [RetailController::class, 'getStockTrans'])->name('ajax.stock.trans');
+        Route::post('/inventory', [InventoryController::class, 'getInventories'])->name('ajax.inventories');
     });
     Route::resource('category', CategoryController::class);
 
-    Route::resource('stock-transactions', StockTransactionController::class);
+    Route::group(['prefix' => 'retail', 'as' => 'retail.'], function(){
+        Route::get('/', [RetailController::class,'index'])->name('index');
+        Route::get('/create', [RetailController::class,'create'])->name('create');
+        Route::post('/store', [RetailController::class,'retailing'])->name('store');
+    });
+
+    Route::group(['prefix' => 'inventory', 'as' => 'inventory.'], function(){
+        Route::get('/', [InventoryController::class,'index'])->name('index');
+        Route::get('/create', [InventoryController::class,'create'])->name('create');
+        Route::post('/qty-update', [InventoryController::class,'qtyAdjust'])->name('qty_update');
+        // Route::post('/store', [RetailController::class,'retailing'])->name('store');
+    });
+
+    
 });
 
 Route::group(['prefix' => 'shop','as' => 'shop.'], function(){

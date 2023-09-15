@@ -48,14 +48,14 @@ $.fn.dataTable.dtcalled = function (config) {
 
                      if (data.canEdit === true) {
                          let url = config.url.dt_edit.replace(":id", row.id);
-                         buttons += `<a class="btn btn-warning" href="${url}"
+                         buttons += `<a class="btn-warning" href="${url}"
                             data-bs-toggle="tooltip" data-bs-placement="left" title="">
                             <i class="fa fa-edit" aria-hidden="true"></i></a>`;
                      }
 
                      if(data.canAjaxEdit === true){
                         let url = config.url.dt_ajax_edit.replace(":id", row.id);
-                        buttons += `<a class="btn btn-warning btn-ajax-edit" click="return false;" data-url="${url}"
+                        buttons += `<a class="btn-warning btn-ajax-edit" click="return false;" data-url="${url}"
                            data-bs-toggle="tooltip" data-bs-placement="left" title="">
                            <i class="fa fa-edit" aria-hidden="true"></i></a>`;
                      }
@@ -68,37 +68,27 @@ $.fn.dataTable.dtcalled = function (config) {
                             data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-trash" aria-hidden="true"></i></a>`;
                      }
 
+                    
+
                      if (data.canDetail === true) {
                         let url = config.url.dt_detail.replace(":id", row.id);
-                        buttons += `&nbsp;<a class="btn btn-primary btn-detail" href="#" 
+                        buttons += `&nbsp;<a class="btn btn-secondary btn-detail" href="#" 
                         data_url="${config.url.dt_detail}"
                          data-id="${row.id}"
                            data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-info" aria-hidden="true"></i></a>`;
-                    }
-
-                    if (data?.canQtyInc === true) {
-                        
-                        buttons += `&nbsp;<a class="btn btn-primary btn-qtyupdate" data-mtype="inc" href="#" 
-                        data-invqty=${row.qty} data-stgqty=${row.storage.qty} data-name=${row.name} data-barcode=${row.barcode}
-                         data-id="${row.id}"
-                           data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-plus" aria-hidden="true"></i></a>`;
-                    }
-
-                    if (data?.canQtyDec === true) {
-                       
-                        buttons += `&nbsp;<a class="btn btn-warning btn-qtyupdate" data-mtype="decs" href="#" 
-                        data-invqty=${row.qty} data-stgqty=${row.storage.qty} data-name=${row.name} data-barcode=${row.barcode}
-                         data-id="${row.id}"
-                           data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-minus" aria-hidden="true"></i></a>`;
                     }
 
                      return buttons;
                  },
              },
          ],
+         columnDefs: [
+            { className: "px-1 py-3", targets: "_all" },
+            
+        ],
          "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {                
             
-                $(nRow).addClass('text-white');
+                $(nRow).addClass('border-b border-gray-200 dark:border-gray-700');
                       
         },
      });
@@ -130,35 +120,6 @@ $.fn.dataTable.dtcalled = function (config) {
                  });
              }
          });
-     });
-
-
-    
-    $(`${dtSelector} tbody`).on("click", '.btn-qtyupdate', function (e) {
-        e.preventDefault();
-
-        $('.showAddDiv').removeClass('d-none')
-      
-         let invqty = $(this).data('invqty')
-         let stgqty = $(this).data('stgqty')
-         let name = $(this).data('name')
-         let barcode = $(this).data('barcode')
-         let id = $(this).data('id')
-         let mtype = $(this).data('mtype')
-         
-
-         
-         $('input[name="storage_qty"]').val(stgqty)
-         $('input[name="storage_qty"]').attr('readOnly',true)
-         $('input[name="item_id"]').val(id)
-         $('input[name="mtype"]').val(mtype)
-         if(mtype == 'inc'){
-            $('.card-title h5').text('Adding Inventroy Qty from storage -'+barcode);
-         }else{
-            $('.card-title h5').text('Adding Inventroy Qty to storage -'+barcode);
-         }
-       
-         
      });
 };
 

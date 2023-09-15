@@ -17,7 +17,6 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->text('name');
             $table->unsignedBigInteger('category_id');
-            $table->text('bar_code');
             $table->text('brand');
             $table->timestamps();
             $table->softDeletes();
