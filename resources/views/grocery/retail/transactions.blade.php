@@ -60,7 +60,10 @@
 
             columns:[
                 
-                {data:'created_at'},
+                {data:'created_at',render:function(str_date){
+                    let date_obj =  new Date(str_date);
+                    return `${date_obj.getDate()}-${date_obj.getMonth()+1}-${date_obj.getFullYear()}`;
+                }},
                 {data:'item.name'},
                 {data:'item.bar_code'},
                 {data:'category_name'},
@@ -68,7 +71,15 @@
                 {data:'qty', render: function(sum){
                     return `<span class="badge bg-white text-dark rounded-pill ms-auto fs-6">${sum}</span>`
                 }},
-                {data:'expired_date'},
+                {data:'expired_date',render:function(str_date){
+                    
+                    if(str_date != null){
+                        let date_obj =  new Date(str_date);
+                    return `${date_obj.getDate()}-${date_obj.getMonth()+1}-${date_obj.getFullYear()}`;
+                    }
+                    return '-'
+                   
+                }},
                  
             ]
 

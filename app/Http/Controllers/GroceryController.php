@@ -9,4 +9,6 @@ class GroceryController extends Controller
     public function index() {
         return view('grocery.home');
     }
+
+   
 }
