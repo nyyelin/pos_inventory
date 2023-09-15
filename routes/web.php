@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RetailController;
 use App\Http\Controllers\GroceryController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockTransactionController;
 use App\Http\Controllers\InventoryController;
@@ -38,8 +39,9 @@ Route::group(['prefix' => 'grocery','as' => 'grocery.','middleware' => ['auth']]
         Route::post('/items', [ItemController::class, 'getItems'])->name('ajax.items');
         Route::post('/stock_trans', [RetailController::class, 'getStockTrans'])->name('ajax.stock.trans');
         Route::post('/inventory', [InventoryController::class, 'getInventories'])->name('ajax.inventories');
+
     });
-    Route::resource('category', CategoryController::class);
+
 
     Route::group(['prefix' => 'retail', 'as' => 'retail.'], function(){
         Route::get('/', [RetailController::class,'index'])->name('index');
@@ -55,12 +57,14 @@ Route::group(['prefix' => 'grocery','as' => 'grocery.','middleware' => ['auth']]
     });
 
     
+
+    Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
+        Route::resource('shop', ShopController::class);
+        Route::post('change_password', [ShopController::class, 'change_password'])->name('change_password');
+    });
+
+
+    Route::group(['prefix' => 'pos','as' => 'pos.'], function(){
+        Route::get('/', [PosController::class, 'index'])->name('index');
+    });
 });
-
-Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
-    Route::resource('shop', ShopController::class);
-});
-
-
-
-
