@@ -33,6 +33,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'grocery','as' => 'grocery.','middleware' => ['auth']], function(){
     Route::get('/', [GroceryController::class,'index'])->name('index');
     Route::resource('item', ItemController::class);
+    Route::resource('category', CategoryController::class);
     
 
     Route::prefix('ajax')->group(function() {
@@ -58,13 +59,15 @@ Route::group(['prefix' => 'grocery','as' => 'grocery.','middleware' => ['auth']]
 
     
 
-    Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
-        Route::resource('shop', ShopController::class);
-        Route::post('change_password', [ShopController::class, 'change_password'])->name('change_password');
-    });
+
+});
+
+Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
+    Route::resource('shop', ShopController::class);
+    Route::post('change_password', [ShopController::class, 'change_password'])->name('change_password');
+});
 
 
-    Route::group(['prefix' => 'pos','as' => 'pos.'], function(){
-        Route::get('/', [PosController::class, 'index'])->name('index');
-    });
+Route::group(['prefix' => 'pos','as' => 'pos.'], function(){
+    Route::get('/', [PosController::class, 'index'])->name('index');
 });

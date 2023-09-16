@@ -98,7 +98,7 @@ $.fn.dataTable.dtcalled = function (config) {
          ],
          "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {                
             
-                $(nRow).addClass('text-white');
+                $(nRow).addClass('text-dark');
                       
         },
      });

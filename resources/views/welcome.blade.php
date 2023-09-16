@@ -14,7 +14,7 @@
         </div>
         <div class="col-lg-5 col-12 text-center mx-auto mt-3">
           <div class="custom-block shadow-lg">
-            <a class="fs-4 fw-bold" href="{{ route('grocery.index') }}">Stock</a>
+            <a class="fs-4 fw-bold" href="{{ route('grocery.category.index') }}">Stock</a>
           </div>
         </div>
 

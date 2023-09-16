@@ -3,7 +3,7 @@
   <section>
     <div class="main-body hero-section p-0">
       @include('sidebars/stock_side_bar')
-      <main class=" mt-3 ms-3">
+      <main class="ms-3 bg-light px-2 py-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Stock</a></li>
