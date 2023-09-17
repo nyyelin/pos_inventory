@@ -34,7 +34,9 @@ class RetailController extends Controller
      ];
         $query = \App\Models\RetailTransaction::query()->with(
             'category','item'
-        );
+        )->whereHas('storage',function($q) {
+            $q->where('user_id', \Auth::user()->id);
+        });
         $query = $this->optionsQuery($query, $options);
         $data = $query->get();
         return Datatables::of($data)
@@ -50,31 +52,35 @@ class RetailController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $items = Item::all();
+        $auth = \Auth::user();
+        $categories = Category::whereHas('shop', function($q){
+            $q->where('user_id', \Auth::user()->id);
+        });
+        
+        $items = Item::whereHas('category.shop',function($q) use ($auth){
+            $q->where('user_id',$auth->id);
+        })->get();
         return view('grocery.retail.create', compact('categories','items'));
     }
 
     public function retailing(Request $request)
     {
-        
+       
         $validated = $request->validate([
-            'item_id' => 'required|unique:items',
+            'item_id' => 'required',
             'total_qty' => 'required|min:1',
             'sell_price' => 'required',
         ]);
         
         $inputs = $request->all();
-       
+      
         $storage = null;
         //stg => storage
-
-        $storage = Storage::where('item_id', $inputs['item_id'])->where('user_id', \Auth::user()->id)->first();
 
         $serial_number = $this->generateCode($inputs);
         $perfix = 'stg-'.\Auth::user()->shop->id.'-';
 
-        if(is_null($storage)){
+        
             $storage = Storage::create([
                 'item_id' => $inputs['item_id'],
                 'serial' => $serial_number,
@@ -84,9 +90,7 @@ class RetailController extends Controller
                 'shop_id' => \Auth::user()->shop->id
             ]);
 
-        }
-
-       
+    
 
         RetailTransaction::create([
             'item_id' => $inputs['item_id'],
@@ -103,7 +107,7 @@ class RetailController extends Controller
             'qty' => $inputs['inventory'],
             'sell_price' => $inputs['sell_price'],
             'expired_date' => $inputs['expired_date'],
-            'barcode' => intval($serial_number.$inputs['id'])
+            'barcode' => intval($serial_number.$inputs['item_id'])
         ]);
 
 

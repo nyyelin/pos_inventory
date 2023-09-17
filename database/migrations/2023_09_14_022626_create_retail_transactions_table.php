@@ -18,9 +18,9 @@ class CreateRetailTransactionsTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
             $table->string('qty')->default(0);
-            $table->date('expired_date');
-            $table->string('buy_price');
-            $table->string('total_amount');
+            $table->date('expired_date')->nullable();
+            $table->string('buy_price')->nullable();
+            $table->string('total_amount')->nullable();
             $table->foreign('storage_id')
                     ->references('id')->on('storages')
                     ->onDelete('cascade');

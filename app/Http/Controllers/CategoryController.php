@@ -15,14 +15,16 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $shops = Shop::all();
+        $shops = Shop::where('user_id',\Auth::user()->id)->get();
         // if ($request->ajax()) {
         //     $id = 1;
             
         //     $query = Category::orderBy('id', 'DESC')->paginate(10);
             
         // }
-        $categories = Category::orderBy('id', 'DESC')->get();
+        $categories = Category::whereHas('shop',function($q){
+            $q->where('user_id',\Auth::user()->id);
+        })->orderBy('id', 'DESC')->get();
         return view('grocery.category.index', compact('shops', 'categories'));
     }
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockTransactionController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ReportController;
 use App\Models\Category;
 
 /*
@@ -68,6 +69,25 @@ Route::group(['prefix' => 'shop','as' => 'shop.'], function(){
 });
 
 
-Route::group(['prefix' => 'pos','as' => 'pos.'], function(){
+Route::group(['middleware' => 'auth','prefix' => 'pos','as' => 'pos.'], function(){
     Route::get('/', [PosController::class, 'index'])->name('index');
+    Route::post('/checkout', [PosController::class, 'checkout'])->name('checkout');
+    Route::post('/search',[InventoryController::class,'barcodeSearch'])->name('barcode.search');
+});
+
+
+Route::group(['middleware' => 'auth','prefix' => 'report','as' => 'report.'], function(){
+    Route::get('/income', [ReportController::class, 'incomeReports'])->name('sales');
+    Route::get('/order/detail/{id}', [ReportController::class, 'orderDetail'])->name('order.detail');
+
+    Route::get('/retails', [ReportController::class, 'restockTrans'])->name('retails');
+
+    Route::prefix('ajax')->group(function() {
+        Route::post('/order', [ReportController::class, 'getAjaxIncomes'])->name('ajax.order');
+        Route::post('/retails', [ReportController::class, 'getAjaxRestockTrans'])->name('ajax.retails');
+        Route::post('/order/detail/{id}', [ReportController::class, 'getAjaxIncomes'])->name('ajax.order.detail');
+       
+
+    });
+   
 });

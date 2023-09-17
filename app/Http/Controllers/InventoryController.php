@@ -28,7 +28,9 @@ class InventoryController extends Controller
      ];
         $query = Inventory::query()->with(
             'item','storage','category'
-        );
+        )->whereHas('storage', function($q) use ($auth){
+            $q->where('user_id', $auth->id);
+        });
         $query = $this->optionsQuery($query, $options);
         $data = $query->get();
         return Datatables::of($data)
@@ -69,5 +71,15 @@ class InventoryController extends Controller
         $storage->save();
 
         return 'success';
+    }
+
+    public function barcodeSearch(Request $request)
+    {
+        $kw = $request->keyword;
+        $product = Inventory::with('item')->where('barcode',$kw)->first();
+        return response()->json([
+            'status' => is_null($product) ? false : true,
+            'result' => $product
+        ]);
     }
 }

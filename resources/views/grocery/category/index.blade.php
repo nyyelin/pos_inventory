@@ -34,10 +34,10 @@
                   </div>
                   <div class="col-lg-4 col-4">
                     <label for="shop" class="form-control-label">Shop</label>
-                    <select name="shop" id="shop" class="form-control">
+                    <select name="shop" id="shop"  class="form-control">
                       <option value="">Select Shop</option>
                       @foreach ($shops as $shop)
-                        <option value="{{ $shop->id }}">{{ $shop->name }}</option>
+                        <option value="{{ $shop->id }}" @if($shop->id == \Auth::user()->shop->id) selected @endif>{{ $shop->name }}</option>
                       @endforeach
                     </select>
                     @error('shop')

@@ -133,76 +133,91 @@ https://templatemo.com/tm-590-topic-listing
 -->
 </head>
 
-<body id="top">
-  <main class="hero-section" style="padding-top: 10px !important">
-    <div class="container mb-2">
-      @if (Auth()->user())
-        <div class="row ">
-          <div class="col-lg-12 dropdown-center">
-            <button class="btn btn-light text-dark dropdown-toggle float-end px-3 py-2 bi-person" type="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              {{ Auth::user()->name }}
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" style="font-size: 15px"> <i class="bi bi-envelope pe-2"></i>
-                  {{ Auth::user()->email }}</a></li>
-              <li><a class="dropdown-item" style="font-size: 15px"><i
-                    class="bi bi-telephone pe-2"></i>{{ Auth::user()->phone }}</a></li>
-              <li>
-                <a class="dropdown-item" style="font-size: 15px; cursor:pointer" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal">
-                  <i class="bi bi-key pe-2"></i> change password
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                                                      document.getElementById('logout-form').submit();"
-                  style="font-size: 15px">
-                  <i class="bi bi-arrow-return-left pe-2"></i>
+<body id="top flex flex-column h-100">
+  
 
-                  {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                  @csrf
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <form method="post" action="{{ route('shop.change_password') }}">
-                @csrf
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <input type="password" class="form-control" placeholder="new password" name="password" minlength="8" required>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-              </form>
+    <main class="hero-section" style="padding-top: 10px !important">
+      <div class="container mb-2">
+        @if (Auth()->user())
+          <div class="d-flex justify-content-between align-items-center ">
+            <a href="/" class="text-decoration-none">
+              <h5  class="text-white">MIN POS</h5>
+            </a>
+            <div class=" dropdown-center">
+              <button class="btn btn-light text-dark dropdown-toggle float-end px-3 py-2 bi-person" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ Auth::user()->name }}
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" style="font-size: 15px"> <i class="bi bi-envelope pe-2"></i>
+                    {{ Auth::user()->email }}</a></li>
+                <li><a class="dropdown-item" style="font-size: 15px"><i
+                      class="bi bi-telephone pe-2"></i>{{ Auth::user()->phone }}</a></li>
+                <li>
+                  <a class="dropdown-item" style="font-size: 15px; cursor:pointer" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <i class="bi bi-key pe-2"></i> change password
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();"
+                    style="font-size: 15px">
+                    <i class="bi bi-arrow-return-left pe-2"></i>
+  
+                    {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      @endif
-    </div>
-    @yield('main_content')
-  </main>
+  
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form method="post" action="{{ route('shop.change_password') }}">
+                  @csrf
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <input type="password" class="form-control" placeholder="new password" name="password" minlength="8" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        @endif
+      </div>
+      <div class="">
+        @yield('main_content')
+      </div>
+    </main>
+  
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container text-center">
+        <span class="text-muted text-center">Thank you so much for your choice!</span>
+      </div>
+    </footer>
 
+  
+  
 
 
   <!-- JAVASCRIPT FILES -->
   <script src="{{ asset('template/js/jquery.min.js') }}"></script>
   <script src="{{ asset('template/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('template/js/jquery.sticky.js') }}"></script>
-  <script src="{{ asset('plugin/js/localstorage.js') }}" rel="stylesheet"></script>
+  {{-- <script src="{{ asset('plugin/js/localstorage.js') }}" rel="stylesheet"></script> --}}
 
   {{-- <script src="{{ asset('template/js/click-scroll.js') }}"></script> --}}
   <script src="{{ asset('template/js/custom.js') }}"></script>

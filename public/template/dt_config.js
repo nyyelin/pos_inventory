@@ -70,7 +70,7 @@ $.fn.dataTable.dtcalled = function (config) {
 
                      if (data.canDetail === true) {
                         let url = config.url.dt_detail.replace(":id", row.id);
-                        buttons += `&nbsp;<a class="btn btn-primary btn-detail" href="#" 
+                        buttons += `&nbsp;<a class="btn btn-primary btn-detail" href="${url}" 
                         data_url="${config.url.dt_detail}"
                          data-id="${row.id}"
                            data-bs-toggle="tooltip" data-bs-placement="right" title=""><i class="fa fa-info" aria-hidden="true"></i></a>`;

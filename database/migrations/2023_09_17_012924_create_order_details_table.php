@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventoriesTable extends Migration
+class CreateOrderDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,29 @@ class CreateInventoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
             $table->string('qty')->default(0);
-            $table->text('barcode');
-            $table->string('sell_price');
-            $table->string('expired_date')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->foreign('storage_id')
-            ->references('id')->on('storages')
+            $table->string('sell_price')->default(0);
+            $table->string('discount')->default(0);
+            $table->foreign('order_id')
+            ->references('id')->on('orders')
             ->onDelete('cascade');
             $table->foreign('item_id')
             ->references('id')->on('items')
             ->onDelete('cascade');
+            $table->foreign('storage_id')
+            ->references('id')->on('storages')
+            ->onDelete('cascade');
+            $table->timestamps();
+            $table->softDeletes();
         });
+
     }
+
     /**
      * Reverse the migrations.
      *
@@ -39,6 +43,6 @@ class CreateInventoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('order_details');
     }
 }

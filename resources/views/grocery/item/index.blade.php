@@ -7,7 +7,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Stock</a></li>
-            <li class="breadcrumb-item"><a href="#">Category List</a></li>
+            <li class="breadcrumb-item"><a href="#">Product List</a></li>
           </ol>
         </nav>
 
@@ -102,7 +102,7 @@
                   <input type="hidden" name="id">
                   
                   <div class="col-lg-4 col-4">
-                    <label for="category_id" class="form-control-label">Category</label>
+                    <label for="category_id" class="form-control-label">Product List</label>
                     <select name="category_id" id="category_id" class="form-control">
                       <option value="">Select Category</option>
                       @foreach ($categories as $cat)
@@ -164,6 +164,7 @@
           success: function (data) {
               console.log('Submission was successful.');
               console.log(data);
+              window.location.reload()
           },
           error: function (data) {
               console.log('An error occurred.');

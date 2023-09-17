@@ -29,7 +29,9 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::whereHas('shop', function($q){
+            $q->where('user_id',\Auth::user()->id);
+        })->get();
         return view('grocery.item.index',compact('categories'));
 
     }
@@ -80,12 +82,12 @@ class ItemController extends Controller
     public function store(Request $request)
     {
        $inputs = $request->all();
-       
+       $data = Item::create($inputs);
        try { 
         DB::beginTransaction();
 
         // Do something and save to the db...
-        $data = Item::create($inputs);
+        
         // Commit the transaction
 
         return response()->json([
